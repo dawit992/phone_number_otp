@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class MyPhone extends StatefulWidget {
+  static String verify = '';
+
   const MyPhone({Key? key}) : super(key: key);
 
   @override
@@ -9,11 +13,11 @@ class MyPhone extends StatefulWidget {
 
 class _MyPhoneState extends State<MyPhone> {
   TextEditingController countryController = TextEditingController();
-
+  var phone = '';
   @override
   void initState() {
     // TODO: implement initState
-    countryController.text = "+91";
+    countryController.text = "+251";
     super.initState();
   }
 
@@ -82,6 +86,9 @@ class _MyPhoneState extends State<MyPhone> {
                     ),
                     Expanded(
                         child: TextField(
+                      onChanged: (value) {
+                        phone = value;
+                      },
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -102,8 +109,18 @@ class _MyPhoneState extends State<MyPhone> {
                         primary: Colors.green.shade600,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'verify');
+                    onPressed: () async {
+                      await FirebaseAuth.instance.verifyPhoneNumber(
+                        phoneNumber: '${countryController.text + phone}',
+                        verificationCompleted:
+                            (PhoneAuthCredential credential) {},
+                        verificationFailed: (FirebaseAuthException e) {},
+                        codeSent: (String verificationId, int? resendToken) {
+                          MyPhone.verify = verificationId;
+                          Navigator.pushNamed(context, 'verify');
+                        },
+                        codeAutoRetrievalTimeout: (String verificationId) {},
+                      );
                     },
                     child: Text("Send the code")),
               )

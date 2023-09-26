@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "240699881676",
+    "project_id": "tenafirst-f4861",
+    "storage_bucket": "tenafirst-f4861.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240699881676:android:9fca410714860fb36fea69",
+        "android_client_info": {
+          "package_name": "com.ahaduweb.tenafirst"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZDoZHK-EsVBo3HgRvr4KSkdF7kHg9yv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240699881676:android:db8bb2fa5ece87236fea69",
+        "android_client_info": {
+          "package_name": "com.example.phone_otp_ui"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZDoZHK-EsVBo3HgRvr4KSkdF7kHg9yv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
