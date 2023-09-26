@@ -117,7 +117,8 @@ class _MyVerifyState extends State<MyVerify> {
 
                         // Sign the user in (or link) with the credential
                         await auth.signInWithCredential(credential);
-                        Navigator.pushNamedAndRemoveUntil(context, "home", (route) => false)
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, "home", (route) => false);
                       } catch (e) {}
                     },
                     child: Text("Verify Phone Number")),
