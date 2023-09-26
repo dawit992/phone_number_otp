@@ -1,0 +1,59 @@
+workflows:
+  tena-first:
+    name: TenaFist Workflow
+    instance_type: mac_mini_m1
+    max_build_duration: 100
+    environment:
+      # groups:
+      #   - keystore_credentials
+      vars:
+        GOOGLE_PLAY_TRACK: 'beta'
+      flutter: 3.10.5
+      # android_signing:
+      #   - tenafirst_keystore
+      xcode: latest
+      java: 11
+      
+    cache:
+      cache_paths:
+        - $HOME/.gradle/caches
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/library/Caches/CocoaPods
+        - $CM_BUILD_DIR/node_modules
+    triggering:
+      events:
+        - push
+        - pull_request
+        - tag
+      branch_patterns:
+        - pattern: '*'
+          include: true
+        - pattern: develop
+          include: true
+        - pattern: feature-1
+          include: true
+          source: true
+    scripts:
+      - name: Get Flutter Packages
+        script: flutter packages pub get
+      - name: Build apk
+        script: flutter build apk --release
+      # - name: bundle file
+      #   script: flutter build appbundle --release
+      # - name: Build iOS
+      #   script: flutter build ios
+      # - name: Set up key_properties
+      #   script: /
+      #     cat >> "$CM_BUILD_DIR/android/key.properties" <<EOF
+      #     storePassword=$CM_KEYSTORE_PASSWORD
+      #     keyPassword=$CM_KEY_PASSWORD
+      #     keyAlias=$CM_KEY_ALIAS
+      #     storeFile=$CM_KEYSTORE_PATH
+      #     EOF
+    artifacts:
+      - build/**/outputs/apk/**/*.apk
+      - build/**/outputs/**/*.aab
+    publishing:
+      email:
+        # recipients:
+        #   - dawitgirma992@gmail.com
