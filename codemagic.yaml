@@ -8,7 +8,7 @@ workflows:
       #   - keystore_credentials
       vars:
         GOOGLE_PLAY_TRACK: 'beta'
-      flutter: 3.10.5
+      flutter: 3.13.0
       # android_signing:
       #   - tenafirst_keystore
       xcode: latest
